@@ -59,7 +59,11 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            # 从训练数据中随机选择 batch_size 个索引
+            indices = np.random.choice(num_train, batch_size, replace=True)
+            # 使用索引获取小批量数据和标签
+            X_batch = X[indices]
+            y_batch = y[indices]
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -74,7 +78,7 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            self.W -= learning_rate * grad
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -100,7 +104,10 @@ class LinearClassifier(object):
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+        # 计算分数 (N, C)
+        scores = X.dot(self.W)
+        # 找到每个样本分数最高的类别的索引
+        y_pred = np.argmax(scores, axis=1)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return y_pred
